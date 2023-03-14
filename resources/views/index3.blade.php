@@ -1,10 +1,11 @@
-@extends("layouts.app")
+@extends("layouts.navigation1")
 
 @section("page_title")
 You are now logged in!
 @endsection
 
-@section("content_after_nav_and_sidebars")
+@section("content_after_navbars")
+
 
         <!-- PAGE CONTENT-->
         <div class="page-content--bgf7">

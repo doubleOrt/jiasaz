@@ -1,0 +1,4 @@
+
+don't plan on adding age and gender since they seem pretty superfluous at this point
+
+need to deal with server-side validation of location and phone no (regex'es didn't work when I simply copied from front-end)

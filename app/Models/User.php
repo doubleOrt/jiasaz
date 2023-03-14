@@ -12,6 +12,19 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public static $ROLES = [
+        "user" => "user",
+        "shop_owner" => "shop_owner",
+        "delivery_person" => "delivery_person",
+        "admin" => "admin", 
+    ];
+
+    public static function GET_ROLES_ALLOWED_FROM_REGULAR_REGISTRATION() {
+        $temp = self::$ROLES;
+        unset($temp["admin"]);
+        return $temp;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,7 +33,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
-        'email_address',
+        'email',
         'password',
         'phone_no',
         'location_longitude',

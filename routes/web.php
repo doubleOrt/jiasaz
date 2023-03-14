@@ -18,14 +18,8 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('index3');
-});
 
-Route::get("/my-new-page", function() {
-    return view("my-new-page");
-});
-
+/*
 Route::get("/login", function() {
     return view("login");
 });
@@ -97,4 +91,22 @@ Route::get('/insert_row', function () {
 
 
     dd("Row added successfully!");
+});
+*/
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::get("/my-new-page", function() {
+    return view("my-new-page");
+});
+
+require __DIR__.'/auth.php';
+
+Route::get('/', function () {
+    if (Auth::check()) {
+        return view('layouts.navigation1');
+    }
+   return redirect()->route("login");
 });

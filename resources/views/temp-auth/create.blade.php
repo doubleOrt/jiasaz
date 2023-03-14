@@ -17,9 +17,27 @@ Register
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="/register" method="post">
+
+                                                    <!-- Validation Errors -->
+                            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                            
+                            <ul class="nav nav-pills justify-content-center mb-3 mt-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active show" id="pills-register-as-customer" data-toggle="pill" href="#" role="tab" aria-controls="pills-customer" aria-selected="true">Customer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-register-as-delivery-person" data-toggle="pill" href="#" role="tab" aria-controls="pills-delivery" aria-selected="false">Delivery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-register-as-shop-owner" data-toggle="pill" href="#" role="tab" aria-controls="pills-shop" aria-selected="false">Shop Owner</a>
+                                </li>
+							</ul>
+                            <h4 id="registrationFormHeading" class="text-secondary text-center mb-5">Register as <span class="text-primary">customer...</span></h4>
+                            <form action="{{ route('register') }}" method="post">
 
                                 @csrf
+
+                                <input id="registrationFormRoleInput" type="hidden" name="role" value=""/>
 
                                 <div class="row">
                                     <div class="col-6">
@@ -38,7 +56,7 @@ Register
 
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email_address" placeholder="Email" required>
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email" required>
                                 </div>
                                 
                                 <div class="form-group">
@@ -52,8 +70,8 @@ Register
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Retype Password</label>
-                                    <input class="au-input au-input--full" type="password" name="retype_password" placeholder="Retype Password" required>
+                                    <label>Confirm Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password_confirmation" placeholder="Confirm Password" required>
                                     <small class="form-text text-muted">(Password you entered previously)</small>
                                 </div>
                                 <div class="row">
@@ -85,7 +103,7 @@ Register
                             <div class="register-link">
                                 <p>
                                     Already have account?
-                                    <a href="#">Sign In</a>
+                                    <a href="{{ route('login') }}">Sign In</a>
                                 </p>
                             </div>
                         </div>
@@ -97,6 +115,8 @@ Register
     </div>
 
     <script>
+
+        // this handles the location input
 
         function showPosition(position) {
             const latitude = position.coords.latitude;
@@ -111,7 +131,43 @@ Register
                  alert("Geolocation is not supported by this browser.");
             }
         });
+
+
+        // this handles the role selection 
+
+        const REGISTRATION_FORM = {
+            ROLE_NAMES: {
+                "customer": "user",
+                "delivery": "delivery_person",
+                "shop": "shop_owner",
+            },
+        };
+
+        const ROLE_NAMES = REGISTRATION_FORM["ROLE_NAMES"];
+
+        // set the default value for the hidden role input
+        $("#registrationFormRoleInput").val(ROLE_NAMES["customer"]);
+
+        // changes the name of the blue text within the form heading
+        function changeRegistrationFormText(newText) {
+            $("#registrationFormHeading span").text(newText)
+        }
+
+        $("#pills-register-as-customer").click(function() {
+            changeRegistrationFormText("customer...");
+            $("#registrationFormRoleInput").val(ROLE_NAMES["customer"]);
+        });
         
+        $("#pills-register-as-delivery-person").click(function() {
+            changeRegistrationFormText("delivery...");
+            $("#registrationFormRoleInput").val(ROLE_NAMES["delivery"]);
+        });
+                
+        $("#pills-register-as-shop-owner").click(function() {
+            changeRegistrationFormText("shop...");
+            $("#registrationFormRoleInput").val(ROLE_NAMES["shop"]);
+        });
+
     </script>
 
 @endsection
