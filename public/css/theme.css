@@ -226,10 +226,10 @@ a:active {
 
 a:hover,
 a {
-    -webkit-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 /*-----------------------------------------------------*/
@@ -1642,6 +1642,7 @@ section {
 
 .navbar-sidebar .navbar__list li a:hover {
     color: #4272d7;
+	transform: translate(1px, 0);
 }
 
 .navbar-sidebar .navbar__list li.active > a {

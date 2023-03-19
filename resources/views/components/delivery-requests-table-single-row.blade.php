@@ -7,7 +7,7 @@ $PENDING_ITEM_CLASS = "text-warning";
 <td>#{{$delivery->id}}</td>
 <td class="desc">{{$delivery->order_id}}</td>
 <td>
-    <a class="text-secondary" href="/profile/{{$delivery->delivery_person->id}}">
+    <a href="/profile/{{$delivery->delivery_person->id}}">
         {{$delivery->delivery_person->first_name . " " . $delivery->delivery_person->last_name}}
     </a>
 </td>
@@ -16,20 +16,20 @@ $PENDING_ITEM_CLASS = "text-warning";
     <span class="block-email mt-1">+{{$delivery->delivery_person->phone_no}}</span>
 </td>
 <td>{{$delivery->date_offer_made}}</td>
-<td>${{$delivery->delivery_fee}}</td>
+<td class="text-success">${{$delivery->delivery_fee}}</td>
 <td>
     <div class="table-data-feature">
-        <form method="POST" action="/approve-order">
+        <form method="POST" action="/approve-delivery-offer">
             @csrf
-            <input type="hidden" name="order_id" value="" />
+            <input type="hidden" name="delivery_id" value="{{$delivery->id}}" />
             <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Accept">
             <i class="fa fa-check"></i>
         </button>
         </form>
         &nbsp;
-        <form method="POST" action="/reject-order">
+        <form method="POST" action="/reject-delivery-offer">
             @csrf
-            <input type="hidden" name="order_id" value="" />
+            <input type="hidden" name="delivery_id" value="{{$delivery->id}}" />
             <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject">
                 <i class="fa fa-close"></i>
             </button>

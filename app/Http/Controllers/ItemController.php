@@ -95,8 +95,12 @@ class ItemController extends Controller {
         return "/storage/item_images/" . $file_name . ".jpg";
     }
 
-    public function items_by_user(User $user) {
-        $items = $user->items;
+    public function get_items_by_user(User $user) {
+        return $user->items;
+    }
+
+    public function show_items_by_user(User $user) {
+        $items = get_items_by_user($user);
         $user_full_name = $user->first_name . " " . $user->last_name;
         $user_id = $user->id;
         return view("items.index", compact("items", "user_full_name", "user_id"));

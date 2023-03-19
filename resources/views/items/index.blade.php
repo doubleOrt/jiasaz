@@ -1,3 +1,5 @@
+{{-- Used to show all items shared by a specific user --}}
+
 @extends("layouts.app")
 
 @php
@@ -6,6 +8,8 @@
 @endphp
 
 @section("content")
+
+@include("php-utils")
 
 <!-- PAGE CONTENT-->
 <div class="page-content--bgf7 mt-5">

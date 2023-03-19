@@ -13,6 +13,8 @@ class Order extends Model {
     public static $STATUS_PENDING = "pending";
     public static $STATUS_APPROVED = "approved";
     public static $STATUS_REJECTED = "rejected";
+    public static $STATUS_IN_DELIVERY = "in_delivery";
+    public static $STATUS_DELIVERED = "delivered";
 
     protected $fillable = [
         'item_id',

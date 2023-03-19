@@ -41,6 +41,19 @@ class AuthenticatedSessionController extends Controller
     }
 
 
+    public function show_user_profile(User $user) {
+        $data = [
+            "user" => $user,
+            "orders" => $user->orders,
+        ];
+
+        if ($user->role == User::$ROLES["shop_owner"]) {
+            $data["items"] = $user->items;
+        }
+
+        return view("profile.profile", $data);
+    }
+
     /**
      * Handle an incoming authentication request.
      *

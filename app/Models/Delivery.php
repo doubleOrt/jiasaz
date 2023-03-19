@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
+
+    public $timestamps = false;
+
     protected $fillable = [
         "shop_id",
         'order_id',
@@ -27,6 +30,11 @@ class Delivery extends Model
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(User::class, 'shop_id');
     }
 
     public function delivery_person()

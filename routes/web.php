@@ -113,12 +113,7 @@ Route::get('/category/{category}', function(Category $category) {
     ]);
 });
 
-Route::get('/profile/{user}', function(User $user) {
-    return view("profile", [
-        "user" => $user,
-        "orders" => $user->orders
-    ]);
-});
+Route::get('/profile/{user}', [AuthenticatedSessionController::class, "show_user_profile"]);
 
 Route::post('/order', [OrderController::class, "store"]);
 
@@ -153,4 +148,9 @@ Route::get("/add-item", [ItemController::class, "create"]);
 
 Route::get("/delivery-requests", [DeliveryController::class, "show_requests_to_shop"]);
 
+Route::get("/show-shop-deliveries", [DeliveryController::class, "show_shop_deliveries"]);
+
 Route::post("/add-item", [ItemController::class, "store"]);
+
+Route::post("/approve-delivery-offer", [DeliveryController::class, "approve_offer"]);
+Route::post("/reject-delivery-offer", [DeliveryController::class, "reject_offer"]);

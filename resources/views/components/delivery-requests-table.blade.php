@@ -47,7 +47,7 @@
                                     <th>Order ID</th>
                                     <th>Delivery Person</th>
                                     <th>email and phone no</th>
-                                    <th>Date Sent</th>
+                                    <th>Date Offer Sent</th>
                                     <th>Delivery Fee</th>
                                     <th>Actions</th>
                                 </tr>

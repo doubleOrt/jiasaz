@@ -1,3 +1,9 @@
+
+{{-- This is very inefficient but it's only a fallback in case we forget to include this file before iterating through items --}}
+@if(!function_exists("haversineGreatCircleDistance"))
+    @include("php-utils")
+@endif
+
 @php
 
 $user_lat = auth()->user()->location_latitude;
@@ -28,7 +34,6 @@ $shop_district = $shop_address->district;
 // so that only users can see the item ordering buttons (and any other functionality required)
 $disable_ordering_functionality = !(auth()->user()->role == "user") ? true : false;
 @endphp
-
 
 <div class="col-md-4">
     <div class="card itemCard" data-item-id="{{ $item->id }}">

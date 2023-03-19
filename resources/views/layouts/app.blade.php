@@ -1,14 +1,10 @@
 @php
 
+$user = auth()->user();
+$user->full_name = $user->first_name . " " . $user->last_name;
+$NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
 
-    $user = auth()->user();
-    $user->full_name = $user->first_name . " " . $user->last_name;
-
-    $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
-
-    
 @endphp
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -141,7 +137,7 @@
 
     </head>
     <body class="animsition">
-        
+
         @switch($user->role)
         @case("user")
             @include("navigation.navigation-user")

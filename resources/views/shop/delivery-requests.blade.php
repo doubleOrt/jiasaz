@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("page_title")
-    Shop Orders
+    Delivery Requests
 @endsection
 
 @section("content")

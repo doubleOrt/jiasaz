@@ -8,6 +8,8 @@
 
 @section("content")
 
+@include("php-utils")
+
 <!-- PAGE CONTENT-->
 <div class="page-content--bgf7 mt-5">
     <!-- BREADCRUMB-->

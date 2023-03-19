@@ -25,15 +25,19 @@
                         </li>
                         <li>
                             <a href="/">
-                                <i class="fas fa-home"></i>Order Requests</a>
+                                <i class="fas fa-dollar"></i>Order Requests</a>
                         </li>
                         <li>
                             <a href="/delivery-requests">
                                 <i class="fas fa-shipping-fast"></i>Delivery Requests</a>
                         </li>
                         <li>
+                            <a href="/show-shop-deliveries">
+                                <i class="fas fa-road"></i>Deliveries</a>
+                        </li>
+                        <li>
                             <a href="/my-shop-orders">
-                                <i class="fas fa-dollar"></i>Order History</a>
+                                <i class="fas fa-book"></i>Order History</a>
                         </li>
                         <li>
                             <a href="/my-items">
@@ -83,15 +87,19 @@
                         </li>
                         <li>
                             <a href="/">
-                                <i class="fas fa-home"></i>Order Requests</a>
+                                <i class="fas fa-dollar"></i>Order Requests</a>
                         </li>
                         <li>
                             <a href="/delivery-requests">
                                 <i class="fas fa-shipping-fast"></i>Delivery Requests</a>
                         </li>
                         <li>
+                            <a href="/show-shop-deliveries">
+                                <i class="fas fa-road"></i>Deliveries</a>
+                        </li>
+                        <li>
                             <a href="/my-shop-orders">
-                                <i class="fas fa-dollar"></i>Order History</a>
+                                <i class="fas fa-book"></i>Order History</a>
                         </li>
                         <li>
                             <a href="/my-items">
