@@ -5,6 +5,10 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Item;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 /*
@@ -98,15 +102,55 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get("/my-new-page", function() {
-    return view("my-new-page");
-});
-
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return view('layouts.navigation1');
-    }
-   return redirect()->route("login");
+Route::get('/', [AuthenticatedSessionController::class, "create"])->name("main_page");
+
+Route::get('/category/{category}', function(Category $category) {
+    return view("category", [
+        "category" => $category,
+        "items" => $category->items()->get(),
+    ]);
 });
+
+Route::get('/profile/{user}', function(User $user) {
+    return view("profile", [
+        "user" => $user,
+        "orders" => $user->orders
+    ]);
+});
+
+Route::post('/order', [OrderController::class, "store"]);
+
+Route::post('/cancel-order', [OrderController::class, "cancel"]);
+
+Route::post('/approve-order', [OrderController::class, "approve"]);
+Route::post('/reject-order', [OrderController::class, "reject"]);
+
+Route::get('/orders', [OrderController::class, 'show_all_from_user'])->name('orders.show');
+
+Route::get("/shop-orders/{shop_id}", [OrderController::class, "show_all_to_shop"])->name("orders.shop");
+
+Route::get("/search", [ItemController::class, "search"])->name("items.search");
+
+Route::get("/user-items/{user}", [ItemController::class, "items_by_user"])->name("items.show-by-user");
+
+Route::get("/my-items", function() {
+    $user = auth()->user();
+    if ($user->role == User::$ROLES["shop_owner"]) {
+        return redirect()->route("items.show-by-user", $user->id);
+    }
+});
+
+Route::get("/my-shop-orders", function(){
+    $user = auth()->user();
+    if ($user->role == User::$ROLES["shop_owner"] || $user->role == User::$ROLES["admin"]) {
+        return redirect()->route("orders.shop", $user->id);
+    }
+});
+
+Route::get("/add-item", [ItemController::class, "create"]);
+
+Route::get("/delivery-requests", [DeliveryController::class, "show_requests_to_shop"]);
+
+Route::post("/add-item", [ItemController::class, "store"]);

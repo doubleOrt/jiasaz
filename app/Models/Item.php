@@ -16,9 +16,10 @@ class Item extends Model
         'category_id',
         'title',
         'price',
-        'item_description',
+        'description',
         'original_amount',
         'amount_currently_in_stock',
+        "image_path",
     ];
 
     // Relationships
@@ -49,7 +50,7 @@ class Item extends Model
         $this->amount_currently_in_stock -= $quantity;
         $this->save();
     }
-
+    
     public function isAvailable($quantity)
     {
         return $this->amount_currently_in_stock >= $quantity;

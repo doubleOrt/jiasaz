@@ -4700,7 +4700,6 @@ section {
 }
 
 .table-data3 tbody tr td:last-child {
-    text-align: right;
     padding-right: 50px;
 }
 

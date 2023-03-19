@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->text('description');
             $table->integer('original_amount')->default(1);
             $table->integer('amount_currently_in_stock')->default(1);
+            $table->text('image_path');
             $table->timestamp('date_added')->useCurrent();
 
             $table->foreign('shop_id')->references('id')->on('users');

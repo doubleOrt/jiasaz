@@ -9,6 +9,8 @@ class OrderResponse extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    
     protected $fillable = [
         'order_id',
         'shop_id',

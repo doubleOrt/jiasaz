@@ -7,25 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 class Delivery extends Model
 {
     protected $fillable = [
-        'orderId',
+        "shop_id",
+        'order_id',
         'delivery_person_id',
-        'date_delivery_accepted',
+        'date_offer_made',
+        'date_offer_replied_to',
+        'offer_reply',
         'date_delivered',
         'item_condition_after_delivery',
         'delivery_fee'
     ];
 
     protected $dates = [
-        'date_delivery_accepted',
-        'date_delivered'
+        'date_offer_made',
+        "date_offer_replied_to",
+        'date_delivered',
     ];
 
     public function order()
     {
-        return $this->belongsTo(Order::class, 'orderId');
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
-    public function deliveryPerson()
+    public function delivery_person()
     {
         return $this->belongsTo(User::class, 'delivery_person_id');
     }

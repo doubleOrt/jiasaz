@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('shop_id');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('order_response_id');
+            $table->unsignedBigInteger('order_response_id')->nullable();
             $table->unsignedBigInteger('delivery_id')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected', 'in_delivery', 'delivered']);
             $table->timestamp('date_order_placed')->useCurrent();

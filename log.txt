@@ -2,3 +2,13 @@
 don't plan on adding age and gender since they seem pretty superfluous at this point
 
 need to deal with server-side validation of location and phone no (regex'es didn't work when I simply copied from front-end)
+
+html geolocation is not accurate at all
+
+fix active page as it appears on the navbar (has to be colored blue)
+
+add regexes in the backend for item addition
+
+making an api call for each item card is way too bad
+
+api calls to get user address should be done on registration and added to database instead of being calculated for each item

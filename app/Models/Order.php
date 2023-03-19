@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model {
     use HasFactory;
 
+    public $timestamps = false;
+    
+    public static $STATUS_PENDING = "pending";
+    public static $STATUS_APPROVED = "approved";
+    public static $STATUS_REJECTED = "rejected";
+
     protected $fillable = [
         'item_id',
         'shop_id',
@@ -76,15 +82,20 @@ class Order extends Model {
     public function approve()
     {
         $response = new OrderResponse([
-            'shop_id' => $this->shop_id,
-            'approved_or_rejected' => true,
-            'date_of_response' => now(),
+            "order_id" => $this->id,
+            "shop_id" => $this->shop_id,
+            "approved_or_rejected" => true,
+            "date_of_response" => now(),
         ]);
         $response->save();
 
-        $this->status = 'approved';
+        $this->status = self::$STATUS_APPROVED;
         $this->order_response_id = $response->id;
         $this->save();
+
+        $item = $this->item;
+        $item->amount_currently_in_stock -= $this->quantity;
+        $item->save();
     }
 
 
@@ -147,14 +158,15 @@ class Order extends Model {
     public function reject($reason)
     {
         $response = new OrderResponse([
-            'shop_id' => $this->shop_id,
-            'approved_or_rejected' => false,
-            'reason_for_rejection' => $reason,
-            'date_of_response' => now(),
+            "order_id" => $this->id,
+            "shop_id" => $this->shop_id,
+            "approved_or_rejected" => false,
+            "reason_for_rejection" => $reason,
+            "date_of_response" => now(),
         ]);
         $response->save();
 
-        $this->status = 'rejected';
+        $this->status = self::$STATUS_REJECTED;
         $this->order_response_id = $response->id;
         $this->save();
     }
@@ -172,5 +184,4 @@ class Order extends Model {
         $this->save();
     }
 
-    // ...
 }

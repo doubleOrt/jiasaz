@@ -16,9 +16,12 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
+            $table->foreign('shop_id')->references('id')->on('users');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('delivery_person_id');
-            $table->timestamp('date_delivery_accepted')->useCurrent();
+            $table->timestamp('date_offer_made')->useCurrent();
+            $table->timestamp('date_offer_replied_to')->nullable();
+            $table->boolean('offer_reply')->nullable();
             $table->timestamp('date_delivered')->nullable();
             $table->string('item_condition_after_delivery')->nullable();
             $table->decimal('delivery_fee', 8, 2);

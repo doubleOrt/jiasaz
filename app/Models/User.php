@@ -59,4 +59,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the orders for the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, "customer_id");
+    }
+
+    /**
+     * Get the items by the user.
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class, "shop_id");
+    }
+
+    /**  
+     * Get the orders made to a specific shop
+    */
+    public function shopOrders()
+    {
+        return $this->hasMany(Order::class, 'shop_id');
+    }
+
 }
