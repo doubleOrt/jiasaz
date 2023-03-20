@@ -133,6 +133,13 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
                 overflow: hidden;
             }
 
+            .smallBlock {
+                font-size: 11px;
+                line-height: 20px;
+                padding: 0 8px;
+            }
+
+
         </style>
 
     </head>
@@ -148,7 +155,7 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
             @break
     
         @default
-            @include("navigation.navigation-user")
+            @include("navigation.navigation-delivery-person")
         @endswitch
         
 
@@ -163,6 +170,7 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
             <span class="alertText"></span>
         </div>
 
+    
         <script>
 
         function getAddressFromCoordinates(latitude, longitude) {

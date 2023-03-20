@@ -1,5 +1,4 @@
-@php
-
+@php    
     /**
     * Calculates the distance between two points, with
     * the Haversine formula.

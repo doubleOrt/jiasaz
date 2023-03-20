@@ -1,3 +1,8 @@
+@php
+$map_latitude = $user->location_latitude;
+$map_longitude = $user->location_longitude;
+@endphp
+
 <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active show" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first-tab" aria-selected="true">Orders</a>
@@ -21,11 +26,6 @@
         @endcomponent
     </div>
     <div class="tab-pane fade" id="pills-second">
-        <!--Google map-->
-        <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 400px">
-            <iframe src="https://maps.google.com/maps?q={{$user->location_latitude}},{{$user->location_longitude}}&hl=en&z=15&amp;output=embed" frameborder="0"
-            style="border:0;width:100%;height: 100%;" allowfullscreen></iframe>
-        </div>
-        <!-- End Google Maps-->
+        @include("components.google-maps-map")
     </div>
 </div>

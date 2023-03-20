@@ -23,16 +23,16 @@ class AuthenticatedSessionController extends Controller
         if (Auth::check()) {
             $user = Auth()->user();
             $role = $user->role;
-            if ($role == "user") {
+            if ($role == User::$ROLES["user"]) {
                 return view("index", [
                     "first_ten_items" => Item::take(10)->get()
                 ]);
-            } else if ($role == "shop_owner") {
+            } else if ($role == User::$ROLES["shop_owner"]) {
                 return view("shop.orders", [
                     "orders" => $user->shopOrders->where("status", Order::$STATUS_PENDING)->sortByDesc("id"),
                 ]);
-            } else if ($role == "delivery_person") {
-
+            } else if ($role == User::$ROLES["delivery_person"]) {
+                return redirect()->route("deliveries.show-available");
             } else {
 
             }

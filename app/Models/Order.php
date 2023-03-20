@@ -31,27 +31,27 @@ class Order extends Model {
         'date_order_placed'
     ];
 
-    public function scopePending($query)
+    public static function scopePending($query)
     {
         return $query->where('status', 'pending');
     }
 
-    public function scopeApproved($query)
+    public static function scopeApproved($query)
     {
         return $query->where('status', 'approved');
     }
 
-    public function scopeRejected($query)
+    public static function scopeRejected($query)
     {
         return $query->where('status', 'rejected');
     }
 
-    public function scopeInDelivery($query)
+    public static function scopeInDelivery($query)
     {
         return $query->where('status', 'in_delivery');
     }
 
-    public function scopeDelivered($query)
+    public static function scopeDelivered($query)
     {
         return $query->where('status', 'delivered');
     }
@@ -147,14 +147,14 @@ class Order extends Model {
         return $this->belongsTo(Item::class, 'item_id');
     }
 
-    public function orderResponse()
+    public function order_responses()
     {
-        return $this->belongsTo(OrderResponse::class, 'order_response_id');
+        return $this->hasMany(OrderResponse::class);
     }
 
-    public function delivery()
+    public function deliveries()
     {
-        return $this->belongsTo(Delivery::class, 'delivery_id');
+        return $this->hasMany(Delivery::class);
     }
 
     public function reject($reason)

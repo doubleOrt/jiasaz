@@ -42,7 +42,7 @@ class OrderController extends Controller {
     {
         $user = auth()->user();
         $orders = Order::find($order_id);
-        $order->load('customer', 'shop', 'item', 'delivery', 'orderResponse');
+        $order->load('customer', 'shop', 'item', 'delivery', 'order_responses');
         return view('orders.show', [
             "order" => $order
         ]);

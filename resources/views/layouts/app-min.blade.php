@@ -1,4 +1,4 @@
-
+<!-- this layout is used when the user has not logged in yet, in all other instances, "app" is used instead. -->
 <!DOCTYPE html>
 <html lang="en">
 

@@ -28,7 +28,7 @@
                 <img class="rounded-circle mx-auto d-block" src="/images/icon/avatar-01.jpg" alt="Card image cap">
                 <h5 class="text-sm-center mt-2 mb-1">{{ $user->full_name }}</h5>
                 <div class="location text-sm-center">
-                    <i class="fa fa-globe"></i>&nbsp;{{$user_district}}, {{$user_country}}</div>
+                    <i class="fa fa-map-marker-alt"></i>&nbsp;{{$user_district}}, {{$user_country}}</div>
             </div>
             <hr>
             <div class="card-text text-sm-left">

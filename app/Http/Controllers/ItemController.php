@@ -100,7 +100,7 @@ class ItemController extends Controller {
     }
 
     public function show_items_by_user(User $user) {
-        $items = get_items_by_user($user);
+        $items = $this->get_items_by_user($user);
         $user_full_name = $user->first_name . " " . $user->last_name;
         $user_id = $user->id;
         return view("items.index", compact("items", "user_full_name", "user_id"));

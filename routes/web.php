@@ -128,7 +128,7 @@ Route::get("/shop-orders/{shop_id}", [OrderController::class, "show_all_to_shop"
 
 Route::get("/search", [ItemController::class, "search"])->name("items.search");
 
-Route::get("/user-items/{user}", [ItemController::class, "items_by_user"])->name("items.show-by-user");
+Route::get("/user-items/{user}", [ItemController::class, "show_items_by_user"])->name("items.show-by-user");
 
 Route::get("/my-items", function() {
     $user = auth()->user();
@@ -154,3 +154,7 @@ Route::post("/add-item", [ItemController::class, "store"]);
 
 Route::post("/approve-delivery-offer", [DeliveryController::class, "approve_offer"]);
 Route::post("/reject-delivery-offer", [DeliveryController::class, "reject_offer"]);
+
+Route::get("/show-available-deliveries", [DeliveryController::class, "show_available_deliveries"])->name("deliveries.show-available");
+
+Route::post("/make-delivery-offer", [DeliveryController::class, "make_delivery_offer"]);
