@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Order extends Model {
     use HasFactory;
@@ -108,15 +109,6 @@ class Order extends Model {
         $this->save();
     }
 
-    public function completeDelivery($itemCondition)
-    {
-        $this->status = 'delivered';
-        $this->delivery->item_condition_after_delivery = $itemCondition;
-        $this->delivery->date_delivered = now();
-        $this->delivery->save();
-        $this->save();
-    }
-
     public function canBeApprovedBy(User $user)
     {
         return $this->isPending() && $this->shop_id === $user->id;
@@ -180,7 +172,7 @@ class Order extends Model {
         $this->save();
     }
 
-    public function setDelivered()
+    public function set_delivered()
     {
         $this->status = 'delivered';
         $this->save();

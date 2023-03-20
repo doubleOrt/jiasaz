@@ -20,16 +20,20 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
+                            <a href="/profile/{{$user->id}}">
+                                <i class="fas fa-user"></i>Profile</a>
+                        </li>
+                        <li>
                             <a href="/show-available-deliveries">
                                 <i class="fas fa-truck"></i>Available Deliveries</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-road"></i>Deliveries</a>
+                            <a href="/show-current-deliveries">
+                                <i class="fas fa-road"></i>Current Deliveries</a>
                         </li>
                         <li>
-                            <a href="/profile/{{$user->id}}">
-                                <i class="fas fa-user"></i>Profile</a>
+                            <a href="/show-previous-deliveries/{{$user->id}}">
+                                <i class="fas fa-book"></i>Previous Deliveries</a>
                         </li>
                     </ul>
                 </div>
@@ -48,16 +52,20 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li>
+                            <a href="/profile/{{$user->id}}">
+                                <i class="fas fa-user"></i>Profile</a>
+                        </li>
+                        <li>
                             <a href="/show-available-deliveries">
                                 <i class="fas fa-truck"></i>Available Deliveries</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-road"></i>Deliveries</a>
+                            <a href="/show-current-deliveries">
+                                <i class="fas fa-road"></i>Current Deliveries</a>
                         </li>
                         <li>
-                            <a href="/profile/{{$user->id}}">
-                                <i class="fas fa-user"></i>Profile</a>
+                            <a href="/show-previous-deliveries/{{$user->id}}">
+                                <i class="fas fa-book"></i>Previous Deliveries</a>
                         </li>
                     </ul>
                 </nav>

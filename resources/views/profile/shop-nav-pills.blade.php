@@ -8,10 +8,7 @@ $map_longitude = $user->location_longitude;
         <a class="nav-link active show" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first-tab" aria-selected="true">Items</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second-tab" aria-selected="false">Show On Map</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third-tab" aria-selected="false">Other</a>
+        <a class="nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second-tab" aria-selected="false">Location</a>
     </li>
 </ul>
 <hr />

@@ -18,7 +18,7 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
         <!-- Title Page-->
         <title>@yield("page_title", "Jiasaz")</title>
         
-        <link rel="icon" type="image/x-icon" href="/images/icon/logo-mini.png">
+        <link rel="icon" type="image/x-icon" href="/images/icon/logo-mini1.png">
 
         <!-- Styles ^^^ Breeze -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -138,7 +138,6 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
                 line-height: 20px;
                 padding: 0 8px;
             }
-
 
         </style>
 

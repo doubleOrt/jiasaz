@@ -156,5 +156,8 @@ Route::post("/approve-delivery-offer", [DeliveryController::class, "approve_offe
 Route::post("/reject-delivery-offer", [DeliveryController::class, "reject_offer"]);
 
 Route::get("/show-available-deliveries", [DeliveryController::class, "show_available_deliveries"])->name("deliveries.show-available");
+Route::get("/show-current-deliveries", [DeliveryController::class, "show_current_deliveries"])->name("deliveries.show-current");
+Route::get("/show-previous-deliveries/{user_id}", [DeliveryController::class, "show_previous_deliveries"]);
 
 Route::post("/make-delivery-offer", [DeliveryController::class, "make_delivery_offer"]);
+Route::post("/set-delivery-as-complete", [DeliveryController::class, "set_delivery_as_complete"]);

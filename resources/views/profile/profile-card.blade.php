@@ -18,10 +18,17 @@
     $user_country = $user_address->country;
     $user_district = $user_address->district;
 
+    $PROFILE_CARD_TITLE_TEXT_BASED_ON_ROLE = [
+        "user" => "Customer",
+        "shop_owner" => "Shop Owner",
+        "delivery_person" => "Courier",
+        "admin" => "Admin"
+    ];
+
 @endphp
 <div class="card">
         <div class="card-header userProfileCardHeader text-center" data-role="{{$user->role}}">
-            <strong class="card-title mb-3">{{ ucfirst($user->role) }}</strong>
+            <strong class="card-title mb-3">{{ $PROFILE_CARD_TITLE_TEXT_BASED_ON_ROLE[$user->role] }}</strong>
         </div>
         <div class="card-body">
             <div class="mx-auto d-block">

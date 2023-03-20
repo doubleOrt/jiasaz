@@ -12,3 +12,5 @@ add regexes in the backend for item addition
 making an api call for each item card is way too bad
 
 api calls to get user address should be done on registration and added to database instead of being calculated for each item
+
+add "delivered date" to user order history table 

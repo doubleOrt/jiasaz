@@ -7,7 +7,7 @@
     $COMPONENT_BASED_ON_ROLE = [
         "user" => "profile.user-nav-pills",
         "shop_owner" => "profile.shop-nav-pills",
-        "delivery_person" => "profile.user-nav-pills",
+        "delivery_person" => "profile.delivery-person-nav-pills",
     ];
 @endphp
 

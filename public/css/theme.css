@@ -4696,7 +4696,6 @@ section {
 }
 
 .table-data3 thead tr th:last-child {
-    text-align: right;
     padding-right: 50px;
 }
 

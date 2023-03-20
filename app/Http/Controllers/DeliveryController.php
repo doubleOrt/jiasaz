@@ -53,8 +53,7 @@ class DeliveryController extends Controller {
         return redirect()->back()->with("success", "Delivery offer made!");
     }
 
-    public function get_available_deliveries() {
-        $delivery_person_id = auth()->user()->id;
+    public function get_available_deliveries($delivery_person_id) {
         /* We need to build this fairly complex query so that we don't return orders to
          * which the user has already made an offer but hasn't been replied to
         */
@@ -69,10 +68,62 @@ class DeliveryController extends Controller {
     }
 
     public function show_available_deliveries() {
-        $available_deliveries = $this->get_available_deliveries();
+        $available_deliveries = $this->get_available_deliveries(auth()->user()->id);
         return view("delivery-person.show-available-deliveries", [
             "orders" => $available_deliveries,
         ]);
+    }
+
+    public function get_current_deliveries($delivery_person_id) {
+        return Delivery::where([
+            ["delivery_person_id", "=", $delivery_person_id],
+            ["offer_reply", "=", true],
+            ["date_delivered", "=", Null],
+        ])->get();
+    }
+
+    public function show_current_deliveries() {
+        $current_deliveries = $this->get_current_deliveries(auth()->user()->id);
+        return view("delivery-person.show-current-deliveries", [
+            "current_deliveries" => $current_deliveries,
+        ]);
+    }
+
+    public function get_previous_deliveries($user_id) {
+        return Delivery::where([
+            ["delivery_person_id", "=", $user_id],
+            ["date_delivered", "<>", Null],
+        ])->get();
+    }
+
+    public function show_previous_deliveries($user_id) {
+        $deliveries = $this->get_previous_deliveries($user_id);
+        return view("delivery-person.show-previous-deliveries", [
+            "deliveries" => $deliveries,
+        ]);
+    }
+
+    public function set_delivery_as_complete(Request $request) {
+
+        $validated_data = $request->validate([
+            "delivery_id" => "required|exists:deliveries,id",
+        ]);
+
+        $delivery = Delivery::find($validated_data["delivery_id"]);
+        
+        $user = auth()->user();
+        if (!($user->role == User::$ROLES["delivery_person"])) {
+            return redirect()->back()->with("error", "You must be a delivery person to set a delivery as completed!");
+        }
+        if (!($user->id == $delivery->delivery_person_id)) {
+            return redirect()->back()->with("error", "You don't have permission to set this delivery as completed!");
+        }
+
+        $delivery->date_delivered = Carbon::now();
+        $delivery->save();
+        $delivery->order->set_delivered();
+
+        return redirect()->back()->with("success", "Item successfully set as delivered");
     }
 
     // Allows shops to approve a delivery offer
