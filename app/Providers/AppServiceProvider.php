@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       $WEBSITE_LOGO_IMAGE_PATH = "images/icon/logo.png";
-		  Schema::defaultStringLength(191);
+		  Schema::defaultStringLength(125);
 		  View::share('WEBSITE_LOGO_IMAGE_PATH', $WEBSITE_LOGO_IMAGE_PATH);
     }
 }

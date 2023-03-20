@@ -32,7 +32,7 @@
         </div>
         <div class="card-body">
             <div class="mx-auto d-block">
-                <img class="rounded-circle mx-auto d-block" src="/images/icon/avatar-01.jpg" alt="Card image cap">
+                <img class="rounded-circle mx-auto d-block" src="/images/icon/default-avatar.jpg" alt="Card image cap" width="100px" height="100px" />
                 <h5 class="text-sm-center mt-2 mb-1">{{ $user->full_name }}</h5>
                 <div class="location text-sm-center">
                     <i class="fa fa-map-marker-alt"></i>&nbsp;{{$user_district}}, {{$user_country}}</div>
