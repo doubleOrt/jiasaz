@@ -8,6 +8,7 @@
         "user" => "profile.user-nav-pills",
         "shop_owner" => "profile.shop-nav-pills",
         "delivery_person" => "profile.delivery-person-nav-pills",
+        "admin" => "profile.delivery-person-nav-pills",
     ];
 @endphp
 
@@ -31,6 +32,14 @@
         </div>
     </section>
 </div>
+
+
+
+<script>
+@foreach($errors->all() as $error)
+    {!! "showFixedPositionAlert('danger', '" . $error . "');" !!}
+@endforeach
+</script>
 
 @include("components.order-item-modal")
 

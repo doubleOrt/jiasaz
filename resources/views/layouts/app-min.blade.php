@@ -13,6 +13,8 @@
     <!-- Title Page-->
     <title>@yield("page_title")</title>
 
+    <link rel="icon" type="image/x-icon" href="/images/icon/logo-mini1.png">
+
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">

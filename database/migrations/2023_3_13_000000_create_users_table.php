@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->double('location_latitude')->nullable();
             $table->string('role');
             $table->timestamp('email_verified_at')->nullable();
+            $table->text('profile_image_path');
             $table->rememberToken();
             $table->timestamps();
         });

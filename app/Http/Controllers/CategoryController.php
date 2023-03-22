@@ -15,27 +15,27 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('admin.add-category');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
-            'style' => 'required|max:255'
+            'category_name' => 'required|string|max:255',
+            'category_description' => 'required|string|max:255',
+            'category_color' => 'required|max:255'
         ]);
 
         $category = new Category([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
+            'name' => $request->get('category_name'),
+            'description' => $request->get('category_description'),
             'added_by' => auth()->id(),
-            'style' => $request->get('style')
+            'color' => $request->get('category_color')
         ]);
 
         $category->save();
 
-        return redirect('/categories')->with('success', 'Category has been added');
+        return redirect()->back()->with('success', 'Category has been added');
     }
 
     public function edit($id)
@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
-            'style' => 'required|max:255'
+            'color' => 'required|max:255'
         ]);
 
         $category = Category::find($id);
@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect('/categories')->with('success', 'Category has been updated');
+        return redirect()->back()->with('success', 'Category has been updated');
     }
 
     public function destroy($id)
@@ -67,6 +67,6 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->delete();
 
-        return redirect('/categories')->with('success', 'Category has been deleted');
+        return redirect()->back()->with('success', 'Category has been deleted');
     }
 }

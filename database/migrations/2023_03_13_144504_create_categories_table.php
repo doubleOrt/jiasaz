@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->text('description');
             $table->unsignedBigInteger('added_by');
             $table->dateTime('date_added')->useCurrent();
-            $table->string('style');
+            $table->string('color');
 
             $table->foreign('added_by')->references('id')->on('users');
         });

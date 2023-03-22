@@ -44,7 +44,7 @@ $disable_ordering_functionality = !(auth()->user()->role == "user") ? true : fal
     </div>
     <div class="card-body">
         <h4 class="card-title mb-0">{{ $item->title }}</h4>
-        <span class="badge badge-pill font-weight-normal {{ ($item->category->style == 1) ? 'badge-warning' : 'badge-danger' }} mb-1 itemCategory">
+        <span class="badge badge-pill font-weight-normal mb-1 itemCategory" style="background-color: {{$item->category->color}}">
             <a href="/category/{{$item->category->id}}">{{$item->category->name}}</a>
         </span>
         <h6 class="text-secondary font-weight-normal">

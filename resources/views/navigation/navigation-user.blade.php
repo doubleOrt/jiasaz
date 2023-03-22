@@ -1,5 +1,10 @@
+@php
 
-    <div class="page-wrapper">
+$NAVBAR_USER_IMAGE = ($user->profile_image_path != "") ? $user->profile_image_path : "/images/icon/default-avatar.jpg";
+
+@endphp
+
+<div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
@@ -159,7 +164,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="/images/icon/default-avatar.jpg" alt="John Doe" />
+                                            <img src="{{$NAVBAR_USER_IMAGE}}" alt="User image" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ $user->full_name }}</a>
@@ -168,7 +173,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="/images/icon/default-avatar.jpg" alt="John Doe" />
+                                                        <img src="{{$NAVBAR_USER_IMAGE}}" alt="User Image" />
                                                     </a>
                                                 </div>
                                                 <div class="content">

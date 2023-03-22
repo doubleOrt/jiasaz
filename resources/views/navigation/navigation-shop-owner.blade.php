@@ -1,3 +1,8 @@
+@php
+
+$NAVBAR_USER_IMAGE = ($user->profile_image_path != "") ? $user->profile_image_path : "/images/icon/default-avatar.jpg";
+
+@endphp
 
 <div class="page-wrapper">
         <!-- HEADER MOBILE-->
@@ -191,7 +196,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="/images/icon/default-avatar.jpg" alt="John Doe" />
+                                            <img src="{{$NAVBAR_USER_IMAGE}}" alt="John Doe" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ $user->full_name }}</a>
@@ -200,7 +205,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="/images/icon/default-avatar.jpg" alt="John Doe" />
+                                                        <img src="{{$NAVBAR_USER_IMAGE}}" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">

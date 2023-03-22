@@ -15,7 +15,7 @@ class Category extends Model
         'name',
         'description',
         'added_by',
-        'style',
+        'color',
     ];
 
     protected $dates = [

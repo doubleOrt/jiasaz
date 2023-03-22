@@ -2,7 +2,6 @@
 
 $user = auth()->user();
 $user->full_name = $user->first_name . " " . $user->last_name;
-$NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
 
 @endphp
 <!DOCTYPE html>
@@ -109,21 +108,6 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
             .ordersTable0ItemDescription {
                 font-size: 70% !important;
             }
-/*
-            .userProfileCardHeader[data-role|="user"] {
-                background-color: #007bff;
-                color: white;
-            }
-
-            .userProfileCardHeader[data-role|="shop_owner"] {
-                background-color: #ffc107;
-                color: white;
-            }
-
-            .userProfileCardHeader[data-role|="delivery_person"] {
-                background-color: #28a745;
-                color: white;
-            } */
 
             .allowHorizontalScroll {
                 overflow-x: scroll !important;
@@ -149,20 +133,6 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
             }
 
         </style>
-
-    </head>
-    <body class="animsition">
-
-        <div id="fixedPositionAlertSuccess" class="fixedPositionAlert sufee-alert alert with-close alert-success alert-dismissible fade">
-            <span class="badge badge-pill badge-success">Success</span>
-            <span class="alertText"></span>
-        </div>
-
-        <div id="fixedPositionAlertDanger" class="fixedPositionAlert sufee-alert alert with-close alert-danger alert-dismissible fade">
-            <span class="badge badge-pill badge-danger">Failure</span>
-            <span class="alertText"></span>
-        </div>
-
         <script>
 
             function getAddressFromCoordinates(latitude, longitude) {
@@ -193,21 +163,22 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
             }
 
         </script>
+    </head>
+    <body class="animsition">
 
+        <div id="fixedPositionAlertSuccess" class="fixedPositionAlert sufee-alert alert with-close alert-success alert-dismissible fade">
+            <span class="badge badge-pill badge-success">Success</span>
+            <span class="alertText"></span>
+        </div>
 
-        @switch($user->role)
-        @case("user")
-            @include("navigation.navigation-user")
-            @break
-    
-        @case("shop_owner")
-            @include("navigation.navigation-shop-owner")
-            @break
-    
-        @default
-            @include("navigation.navigation-delivery-person")
-        @endswitch
+        <div id="fixedPositionAlertDanger" class="fixedPositionAlert sufee-alert alert with-close alert-danger alert-dismissible fade">
+            <span class="badge badge-pill badge-danger">Failure</span>
+            <span class="alertText"></span>
+        </div>
+
         
+
+        @include("admin.navbar")
 
 
          <!-- Main JS-->
