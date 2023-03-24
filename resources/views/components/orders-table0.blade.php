@@ -1,9 +1,9 @@
 
                     
-<div class="row justify-content-center m-t-30">
+<div class="row justify-content-center">
     <div class="col-md-12">
         <!-- DATA TABLE-->
-        <div class="table-responsive m-b-40">
+        <div class="table-responsive">
             <table class="table table-borderless table-data3">
                 <thead>
                     <tr>

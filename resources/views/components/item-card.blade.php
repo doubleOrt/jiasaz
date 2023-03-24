@@ -23,13 +23,19 @@ $context = stream_context_create(
 
 $shop_location_latitude = $item->shop->location_latitude;
 $shop_location_longitude = $item->shop->location_longitude;
+/*
 $shop_address_request = json_decode(
     file_get_contents("https://nominatim.openstreetmap.org/reverse?format=json&lat=$shop_location_latitude&lon=$shop_location_longitude&accept-language=en-us", false, $context)
 );
 
+
 $shop_address = $shop_address_request->address;
 $shop_country = $shop_address->country;
 $shop_district = $shop_address->district;
+*/
+
+$shop_country = "Mars";
+$shop_district = "ABC";
 
 // so that only users can see the item ordering buttons (and any other functionality required)
 $disable_ordering_functionality = !(auth()->user()->role == "user") ? true : false;

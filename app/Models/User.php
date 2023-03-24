@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail {
 
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     public static $ROLES = [
         "user" => "user",
@@ -60,30 +61,42 @@ class User extends Authenticatable implements MustVerifyEmail {
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     /**
      * Get the orders for the user.
      */
-    public function orders()
-    {
+    public function orders() {
         return $this->hasMany(Order::class, "customer_id");
+    }
+
+    /**
+     * Get the categories created by the user.
+     */
+    public function created_categories() {
+        return $this->hasMany(Category::class, "added_by");
     }
 
     /**
      * Get the items by the user.
      */
-    public function items()
-    {
+    public function items() {
         return $this->hasMany(Item::class, "shop_id");
     }
 
     /**  
      * Get the orders made to a specific shop
     */
-    public function shopOrders()
-    {
+    public function shop_orders() {
         return $this->hasMany(Order::class, 'shop_id');
+    }
+
+    /**  
+     * Get the deliveries by a specific user
+    */
+    public function deliveries() {
+        return $this->hasMany(Delivery::class, 'delivery_person_id');
     }
 
 }

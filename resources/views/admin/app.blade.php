@@ -68,8 +68,13 @@ $user->full_name = $user->first_name . " " . $user->last_name;
         <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
         <script src="/vendor/select2/select2.min.js">
         </script>
+   
+        <!-- Jquery Data Tables -->
+        <link href="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+        <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
-        <!-- required otherwise laravel doesn't validate jquery ajax requests due to CSRF suspicions -->
+        <!-- Required otherwise laravel doesn't validate jquery ajax requests due to CSRF 
+             suspicions -->
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
@@ -78,13 +83,20 @@ $user->full_name = $user->first_name . " " . $user->last_name;
             });
         </script>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400&family=Roboto&family=Tilt+Neon&family=Ubuntu&display=swap" rel="stylesheet">
+
         <style>
             .fixedPositionAlert {
                 position: fixed;
                 left: 50%;
                 bottom: 10px;
                 transform: translate(-50%, 0);
-                z-index: 1;
+            }
+
+            .zIndexMax {
+                z-index: 999;
             }
 
             .itemCategory a {
@@ -132,7 +144,71 @@ $user->full_name = $user->first_name . " " . $user->last_name;
                 border-radius: 100%;
             }
 
+            .paginate_button {
+                margin: 0 2px;
+                cursor: pointer;
+                padding: 4px 7px;
+                border-radius: 3px;
+                color: #666;
+            }
+
+            .paginate_button:hover {
+                color: #666;
+                background-color: lightgrey; 
+            }
+
+            .paginate_button.current {
+                text-decoration: underline;
+            }
+
+            /* data tables */
+
+            table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting_asc_disabled, table.dataTable thead>tr>th.sorting_desc_disabled, table.dataTable thead>tr>td.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting_asc_disabled, table.dataTable thead>tr>td.sorting_desc_disabled {
+                padding-right: 2px;
+            }
+
+            .table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_asc:after, table.dataTable thead>tr>th.sorting_desc:before, table.dataTable thead>tr>th.sorting_desc:after, table.dataTable thead>tr>th.sorting_asc_disabled:before, table.dataTable thead>tr>th.sorting_asc_disabled:after, table.dataTable thead>tr>th.sorting_desc_disabled:before, table.dataTable thead>tr>th.sorting_desc_disabled:after, table.dataTable thead>tr>td.sorting:before, table.dataTable thead>tr>td.sorting:after, table.dataTable thead>tr>td.sorting_asc:before, table.dataTable thead>tr>td.sorting_asc:after, table.dataTable thead>tr>td.sorting_desc:before, table.dataTable thead>tr>td.sorting_desc:after, table.dataTable thead>tr>td.sorting_asc_disabled:before, table.dataTable thead>tr>td.sorting_asc_disabled:after, table.dataTable thead>tr>td.sorting_desc_disabled:before, table.dataTable thead>tr>td.sorting_desc_disabled:after {
+                font-size: .6em;
+                line-height: 8px;
+            }
+
+            th::before {
+                content: "" !important;
+            }
+
+            th::after {
+                content: "" !important;
+            }
+
+            .tableHoverableHeadings th:hover {
+                opacity: .8;
+            }
+
+            /* end data tables */
+
+            table input[type="checkbox"] {
+                border: 1px solid #666;
+            }
+
+            .imageWithHoverAndActiveEffects {
+                transition: opacity, transform .1s ease-out;
+            }
+
+            .imageWithHoverAndActiveEffects:hover {
+                opacity: .8;
+            }
+
+            .imageWithHoverAndActiveEffects:active {
+                opacity: .6;
+                transform: scale(.9);
+            }
+
+            .tablesSelectInputs {
+                width: auto;
+            }
+
         </style>
+
         <script>
 
             function getAddressFromCoordinates(latitude, longitude) {
@@ -155,10 +231,9 @@ $user->full_name = $user->first_name . " " . $user->last_name;
 
                 const alertElement = $("#" + alertId);                      
                 alertElement.find(".alertText").text(text);
-                alertElement.addClass("show");
+                alertElement.addClass("show zIndexMax");
                 setTimeout(function(){
-                    alertElement.removeClass("show");
-                    console.log("Hidden!!!");
+                    alertElement.removeClass("show zIndexMax");
                 }, 4000);
             }
 

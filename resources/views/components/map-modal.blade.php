@@ -35,9 +35,9 @@
         return "https://maps.google.com/maps?q=" + latitude + "," + longitude + "&hl=en&z=15&output=embed";
     }
     $(".showLocationOnMap").click(function() {
-        console.log("Hello");
         const latitude = $(this).attr("data-location-latitude");
         const longitude = $(this).attr("data-location-longitude");
+        console.log(latitude, longitude);
         $("#mapModalMapContainer")
             .find("iframe")
             .attr("src", getGoogleMapsEmbedUrlForCoordinates(latitude, longitude));

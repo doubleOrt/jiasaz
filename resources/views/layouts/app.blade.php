@@ -79,6 +79,11 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
             });
         </script>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400&family=Roboto&family=Tilt+Neon&family=Ubuntu&display=swap" rel="stylesheet">
+
+
         <style>
             .fixedPositionAlert {
                 position: fixed;
@@ -140,12 +145,28 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
                 padding: 0 8px;
             }
 
-
             .profileCardProfileImageContainer {
                 background-size: cover !important;
                 width: 100px;
                 height: 100px;
                 border-radius: 100%;
+            }
+
+            
+            .card {
+                box-shadow: 0 1px 4px 0 lightgrey;
+                transition: transform .1s ease-out;
+            }
+
+            .card:hover {
+                transform: scale(1.01);
+            }
+
+            .userProfileCardHeader {
+                background-color: #383838;
+                font-family: ubuntu;
+                color: white;
+                text-transform: uppercase;
             }
 
         </style>

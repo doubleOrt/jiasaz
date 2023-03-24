@@ -22,6 +22,26 @@ class Item extends Model
         "image_path",
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        // Whenever an item is deleted, we need to run this to delete all related rows in another tables.
+        static::deleting(function($item) {
+            $item_orders = $item->orders;
+            foreach ($item_orders as $order) {
+                $order_responses = $order->order_responses;
+                foreach($order_responses as $order_response) {
+                    $order_response->delete();
+                }
+                $order_deliveries = $order->deliveries;
+                foreach($order_deliveries as $order_delivery) {
+                    $order_delivery->delete();
+                }
+                $order->delete();
+            }
+       });
+    }
+
     // Relationships
     public function shop()
     {

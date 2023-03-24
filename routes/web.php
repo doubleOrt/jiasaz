@@ -11,6 +11,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 /*
@@ -44,14 +45,14 @@ Route::middleware(["auth"])->group(function() {
 
     Route::post('/cancel-order', [OrderController::class, "cancel"]);
 
-    Route::post('/approve-order', [OrderController::class, "approve"]);
-    Route::post('/reject-order', [OrderController::class, "reject"]);
-
     Route::get('/orders', [OrderController::class, 'show_all_from_user'])->name('orders.show');
 
     Route::middleware(["role:admin|shop_owner"])->group(function(){
         Route::get("/shop-orders/{shop_id}", [OrderController::class, "show_all_to_shop"])
         ->name("orders.shop");
+        
+        Route::post('/approve-order', [OrderController::class, "approve"]);
+        Route::post('/reject-order', [OrderController::class, "reject"]);
 
         Route::get("/my-shop-orders", function(){
             $user = auth()->user();
@@ -108,10 +109,34 @@ Route::middleware(["auth"])->group(function() {
     })->name("account.update");
 
     
-    Route::get("/admin-add-category", [CategoryController::class, "create"])
+    Route::get("/admin-add-category", [CategoryController::class, "create_add_category"])
         ->middleware(["permission:add item categories"]);
 
     Route::post("/admin-add-category", [CategoryController::class, "store"])
         ->middleware(["permission:add item categories"]);
+            
+    Route::get("/admin-view-categories", [CategoryController::class, "create_admin_view_categories"])
+    ->middleware(["permission:admin view categories"]);
+
+    Route::post("/admin-update-category", [CategoryController::class, "update"])
+    ->middleware(["permission:admin update categories"]);
+
+    Route::get("/admin-view-items", [ItemController::class, "create_admin_view_items"])
+    ->middleware(["permission:admin view items"]);
+    
+    Route::post("/admin-update-item", [ItemController::class, "admin_update"])
+    ->middleware(["permission:admin update items"]);
+
+    Route::post("/admin-delete-item", [ItemController::class, "admin_delete_item"])
+    ->middleware(["permission:admin delete items"]);
+
+    Route::get("/admin-view-users", [AuthenticatedSessionController::class, "create_admin_view_users"])
+    ->middleware(["permission:admin view users"]);
+
+    Route::post("/admin-update-user-account", [AuthenticatedSessionController::class, "admin_update_user"])
+    ->middleware(["permission:update user accounts"]);
+    
+    Route::post("/admin-delete-user", [RegisteredUserController::class, "admin_delete_user"])
+    ->middleware(["permission:admin delete user accounts"]);
 
 });

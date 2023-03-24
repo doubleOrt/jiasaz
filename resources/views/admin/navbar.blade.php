@@ -23,22 +23,13 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                                 <i class="fas fa-home"></i>
                                 <span class="bot-line"></span>Home</a>
                         </li>
-                        <li class="has-sub">
-                            <a href="#">
-                                <i class="fas fa-user"></i>
-                                <span class="bot-line"></span>Users</a>
-                            <ul class="header3-sub-list list-unstyled">
-                                <li>
-                                    <a href="login.html">Customers</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Shops</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Delivery Personnel</a>
-                                </li>
-                            </ul>
+
+                        <li>
+                        <a href="/admin-view-users">
+                            <i class="fas fa-user"></i>
+                            <span class="bot-line"></span>Users</a>
                         </li>
+
                         <li class="has-sub">
                             <a href="#">
                                 <i class="fas fa-lock"></i> Roles
@@ -53,24 +44,22 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                                 </li>
                             </ul>
                         </li>
+                        
                         <li class="has-sub">
                             <a href="#">
                                 <i class="fas fa-list-alt"></i>
                                 <span class="bot-line"></span>Categories</a>
                             <ul class="header3-sub-list list-unstyled">
                                 <li>
-                                    <a href="button.html">View Categories</a>
+                                    <a href="/admin-view-categories">View Categories</a>
                                 </li>
                                 <li>
                                     <a href="/admin-add-category">Add Categories</a>
                                 </li>
-                                <li>
-                                    <a href="tab.html">Displayed Categories</a>
-                                </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin-view-items">
                                 <i class="fas fa-shopping-basket"></i>
                                 <span class="bot-line"></span>Items</a>
                         </li>
@@ -196,20 +185,10 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                                 <span class="bot-line"></span>Home</a>
                     </li>
 
-                    <li class="has-sub">
-                        <a class="js-arrow" href="#">
-                            <i class="fas fa-copy"></i>Users</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                            <li>
-                                <a href="login.html">Customers</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Shops</a>
-                            </li>
-                            <li>
-                                <a href="forget-pass.html">Delivery Personnel</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="/admin-view-users">
+                            <i class="fas fa-user"></i>
+                            <span class="bot-line"></span>Users</a>
                     </li>
 
                     <li class="has-sub">
@@ -230,19 +209,16 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                             <i class="fas fa-list-alt"></i>Categories</a>
                         <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                             <li>
-                                <a href="button.html">View Categories</a>
+                                <a href="/admin-view-categories">View Categories</a>
                             </li>
                             <li>
                                 <a href="/admin-add-category">Add Categories</a>
-                            </li>
-                            <li>
-                                <a href="tab.html">Displayed Categories</a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                            <a href="#">
+                            <a href="/admin-view-items">
                                 <i class="fas fa-shopping-basket"></i>
                                 <span class="bot-line"></span>Items</a>
                     </li>

@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('added_by');
             $table->dateTime('date_added')->useCurrent();
             $table->string('color');
+            $table->boolean('displayed_in_navbar')->default(false);
 
             $table->foreign('added_by')->references('id')->on('users');
         });

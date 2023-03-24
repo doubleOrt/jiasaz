@@ -86,18 +86,17 @@ $NAVBAR_USER_IMAGE = ($user->profile_image_path != "") ? $user->profile_image_pa
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-table"></i>Categories</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
+                                @php 
+                                    $categories_to_display_in_navbar = App\Models\Category::where("displayed_in_navbar", "1")->get();
+                                @endphp
+
+                                @foreach($categories_to_display_in_navbar as $category)
+                                    <li>
+                                        <a href="/category/{{$category->id}}">
+                                            {{$category->name}}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </li>
                     </ul>

@@ -14,3 +14,9 @@ making an api call for each item card is way too bad
 api calls to get user address should be done on registration and added to database instead of being calculated for each item
 
 add "delivered date" to user order history table 
+
+move category info items into their own columns (admin view categories)
+
+add eager loading and avoid n+1 problem
+
+if an admin creates a category and then you delete the admin, there will be problems when viewing the category (due to added_by now returning null or undefined or whatever)

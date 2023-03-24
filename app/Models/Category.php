@@ -16,6 +16,7 @@ class Category extends Model
         'description',
         'added_by',
         'color',
+        "displayed_in_navbar",
     ];
 
     protected $dates = [
@@ -24,7 +25,7 @@ class Category extends Model
 
     public function admin()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'added_by');
     }
 
     public function items()

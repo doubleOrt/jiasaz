@@ -43,6 +43,12 @@ class ItemController extends Controller {
         return redirect()->route("main_page")->with("error", "User does not have the required permission!");
     }
 
+    public function create_admin_view_items() {
+        return view("admin.view-items", [
+            "items" => Item::with(["category", "shop", "orders"])->get(),
+        ]);
+    }
+
     /**
      * Store a newly created item in storage.
      *
@@ -55,9 +61,9 @@ class ItemController extends Controller {
         $validatedData = $request->validate([
             'shop_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
-            'title' => 'required',
+            'title' => 'required|string|max:255',
             'price' => 'required|min:0.01',
-            'description' => 'required',
+            'description' => 'required|string',
             'original_amount' => 'required|min:1',
             "image" => "required|image",
         ]);
@@ -164,17 +170,51 @@ class ItemController extends Controller {
         return redirect()->route('items.show', $item->id);
     }
 
+     /**
+     * Update the specified item in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Item  $item
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_update(Request $request, Item $item) {
+
+        $attributes = $request->validate([
+            "item_id" => "required|exists:items,id",
+            'category_id' => 'exists:categories,id',
+            'title' => 'string|max:255',
+            'price' => 'numeric|min:0.01',
+            'description' => 'string',
+            'image' => 'image',
+        ]);
+
+        if (array_key_exists("image", $attributes)) {
+            $image_path = $this->save_item_image($attributes["image"]);
+            $attributes["image_path"] = $image_path;
+            unset($attributes["image"]);
+        }
+
+        $item = Item::find($attributes["item_id"]);
+        unset($attributes["item_id"]);
+        $item->update($attributes);
+
+        return "Item updated successfully!";
+    }
+
+    public function admin_delete_item(Request $request) {
+        $item = Item::findOrFail($request->input("item_id"));
+        $this->destroy($item);
+        return "Item Deleted Successfully!";
+    }
+
     /**
      * Remove the specified item from storage.
      *
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
-    {
+    public function destroy(Item $item) {
         $item->delete();
-
-        return redirect()->route('items.index');
     }
 
 }

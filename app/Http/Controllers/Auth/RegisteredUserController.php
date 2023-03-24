@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
+use Exception;
 
 
 class RegisteredUserController extends Controller
@@ -38,7 +39,7 @@ class RegisteredUserController extends Controller
 
         $attributes = $request->validate([
             "first_name" => ["required", "string", "min:2", "max:255"],
-            "last_name" => ["required", "min:2", "max:255"],
+            "last_name" => ["required", "string", "min:2", "max:255"],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             "phone_no" => ["required", "string", "unique:users"],
@@ -62,4 +63,18 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    public function admin_delete_user(Request $request) {
+        $logged_in_user = Auth()->user();
+        if (!$logged_in_user->can("admin delete user accounts")) {
+            throw new Exception("You don't have the right permissions!");
+        }
+        $attributes = $request->validate([
+            "user_id" => "required|exists:users,id",
+        ]);
+        $user = User::find($attributes["user_id"]);
+        $user->delete();
+        return "User deleted successfully!";
+    }
+
 }
