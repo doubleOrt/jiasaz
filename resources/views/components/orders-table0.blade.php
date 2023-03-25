@@ -7,6 +7,7 @@
             <table class="table table-borderless table-data3">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Shop</th>

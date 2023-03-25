@@ -24,36 +24,16 @@ $NAVBAR_USER_IMAGE = ($user->profile_image_path != "") ? $user->profile_image_pa
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
+  
                         <li>
                             <a href="/">
-                                <i class="fas fa-home"></i>Home</a>
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
                             <a href="/profile/{{$user->id}}">
                                 <i class="fas fa-user"></i>Profile</a>
                         </li>
-                        <li>
-                            <a href="/orders">
-                                <i class="fas fa-dollar"></i>Orders</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Categories</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul>
-                        </li>
+
                     </ul>
                 </div>
             </nav>
@@ -70,35 +50,16 @@ $NAVBAR_USER_IMAGE = ($user->profile_image_path != "") ? $user->profile_image_pa
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
+
                         <li>
                             <a href="/">
-                                <i class="fas fa-home"></i>Home</a>
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
                             <a href="/profile/{{$user->id}}">
                                 <i class="fas fa-user"></i>Profile</a>
                         </li>
-                        <li>
-                            <a href="/orders/{{$user->id}}">
-                                <i class="fas fa-dollar"></i>Orders</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Categories</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                @php 
-                                    $categories_to_display_in_navbar = App\Models\Category::where("displayed_in_navbar", "1")->get();
-                                @endphp
 
-                                @foreach($categories_to_display_in_navbar as $category)
-                                    <li>
-                                        <a href="/category/{{$category->id}}">
-                                            {{$category->name}}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
                     </ul>
                 </nav>
             </div>

@@ -1,13 +1,13 @@
 @extends("admin.app")
 
 @section("page_title")
-    Users
+    Roles
 @endsection
 
 @php
     $user = auth()->user();
 
-    $PAGE_MAIN_TEXT = "View Users"
+    $PAGE_MAIN_TEXT = "View Roles"
 @endphp
 
 @include("php-utils")
@@ -31,7 +31,7 @@
                                     <li class="list-inline-item seprate">
                                         <span>/</span>
                                     </li>
-                                    <li class="list-inline-item">View Users</li>
+                                    <li class="list-inline-item">View Roles</li>
                                 </ul>
                             </div>
                             <form class="au-form-icon--sm" action="" method="post">
@@ -50,24 +50,53 @@
                         <div class="col md-12"><hr /></div>
                     </div>
                 </div>
+
                 <div class="row">
-                    @include("admin.components.users-percentage-chart")
+                    @component("admin.components.roles-table")
+                        @slot("roles_rows")
+                            @foreach($roles as $role)
+                                @include("admin.components.roles-table-single-row")
+                            @endforeach
+                        @endslot
+                    @endcomponent
+
+                    @include("admin.components.role-permissions-sidebar")
                 </div>
-                @php
-                    $roles = Spatie\Permission\Models\Role::all();
-                @endphp
-                @component('admin.components.users-table')
-                    @slot("users_rows")
-                        @foreach ($users as $user) 
-                            @include("admin.components.users-table-single-row")
-                        @endforeach
-                    @endslot
-                @endcomponent
+
             </div>
         </section>
     </div>
 
-    @include("components.map-modal")
+<script>
 
+    const rolePermissions = {
+        @foreach($roles as $role)
+            {!! "$role->id: " . "[" !!} 
+                @foreach($role->permissions as $permission)
+                    {!! '"' . $permission->name . '",' !!}
+                @endforeach
+            {!! "]," !!}
+        @endforeach
+    };
+
+    $(".rolesTableSeePermissionsButton").click(function(e) {
+        const role_id = $(this).attr("data-role-id");
+        const role = rolePermissions[role_id];         
+        $("#rolePermissionsTableTableBody").html("");       
+        for (let i = 0; i < role.length; i++) {
+            const permission_html = `<tr>
+                <td>
+                    <div class="table-data__info">
+                        <span>` + role[i] + `</span>
+                    </div>
+                </td>
+            </tr>`;
+
+            $(permission_html).hide().appendTo("#rolePermissionsTableTableBody").fadeIn(500);
+        }
+    });
+
+
+</script>
 
 @endsection

@@ -43,14 +43,14 @@ class AuthenticatedSessionController extends Controller
                 ]);
             } else if ($user->hasRole("shop_owner")) {
                 return view("shop.orders", [
-                    "orders" => $user->shopOrders->where("status", Order::$STATUS_PENDING)->sortByDesc("id"),
+                    "orders" => $user->shop_orders->where("status", Order::$STATUS_PENDING)->sortByDesc("id"),
                 ]);
             } else if ($user->hasRole("delivery_person")) {
                 return redirect()->route("deliveries.show-available");
             } else if ($user->hasRole("admin")) {
-                $dashboard_data = AdminController::GET_DASHBOARD_DATA();
+                $stats_info = AdminController::GET_STATS_INFO();
                 return view("admin.dashboard", [
-                    "dashboard_data" => $dashboard_data,
+                    "stats_info" => $stats_info,
                 ]);
             }
         }

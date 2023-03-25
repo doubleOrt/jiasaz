@@ -18,9 +18,14 @@ $text_based_on_status = [
 
 @endphp
 <tr>
+    <td>#{{$order->id}}</td>
     <td>{{$order->item->title}}</td>
     <td class="ordersTable0ItemDescription">{{$order->item->description}}</td>
-    <td>{{$order->shop->first_name . " " . $order->shop->last_name}}</td>
+    <td>
+      <a href="/profile/{{$order->shop->id}}">
+        {{$order->shop->first_name . " " . $order->shop->last_name}}
+      </a>
+    </td>
     <td>{{$order->quantity}}</td>
     <td>${{$order->item->price * $order->quantity}}</td>
     <td>{{$order->date_order_placed}}</td>

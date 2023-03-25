@@ -16,8 +16,7 @@
                 <thead>
                     <tr>
                         <th><small>ID</small></th>
-                        <th><small>First Name</small></th>
-                        <th><small>Last Name</small></th>
+                        <th><small>Full Name</small></th>
                         <th><small>Contact Info</small></th>
                         <th><small>Password</small></th>
                         <th><small>Profile Image</small></th>

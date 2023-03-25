@@ -6,8 +6,16 @@
 @endphp
 <tr data-user-id="{{$user->id}}">
     <td>{{$user->id}}</td>
-    <td class="userFirstName" contenteditable="true">{{$user->first_name}}</td>
-    <td class="userLastName" contenteditable="true">{{$user->last_name}}</td>
+    <td>
+        <a href="/profile/{{$user->id}}">
+            <span class="userFirstName" contenteditable="true">
+                {{$user->first_name}}
+            </span>
+            <span class="userLastName" contenteditable="true">
+                {{$user->last_name}}
+            </span>
+        </a>
+    </td>
     <td>
         <span class="block-email smallBlock">
             Email: 
@@ -76,34 +84,40 @@
     </td>
     <td>
         @if($user->hasRole("customer"))
-            <span class="block-email smallBlock">
-                No. Orders: 
-                <strong>
-                    {{$user->orders->count()}}
-                </strong>
-            </span>
+            <a href="/orders/{{$user->id}}">
+                <span class="block-email smallBlock">
+                    No. Orders: 
+                    <strong>
+                        {{$user->orders->count()}}
+                    </strong>
+                </span>
+            </a>
         @elseif($user->hasRole("shop_owner"))
-            <span class="block-email smallBlock">
-                No. Orders To: 
-                <strong>
-                    {{$user->shop_orders->count()}}
-                </strong>
-            </span>
+            <a href="/shop-orders/{{$user->id}}">
+                <span class="block-email smallBlock">
+                    No. Orders To: 
+                    <strong>
+                        {{$user->shop_orders->count()}}
+                    </strong>
+                </span>
+            </a>
             <a href="/user-items/{{$user->id}}">
                 <span class="block-email smallBlock mt-1">
-                        No. Items: 
-                        <strong>
-                            {{$user->items->count()}}
-                        </strong>
+                    No. Items: 
+                    <strong>
+                        {{$user->items->count()}}
+                    </strong>
                 </span>        
             </a>   
         @elseif($user->hasRole("delivery_person"))
-            <span class="block-email smallBlock">
-                No. Deliveries: 
-                <strong>
-                    {{$user->deliveries->count()}}
-                </strong>
-            </span>
+            <a href="/show-previous-deliveries/{{$user->id}}">
+                <span class="block-email smallBlock">
+                    No. Deliveries: 
+                    <strong>
+                        {{$user->deliveries->count()}}
+                    </strong>
+                </span>
+            </a>
         @endif
     </td>
     <td>

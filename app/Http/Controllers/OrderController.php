@@ -28,8 +28,12 @@ class OrderController extends Controller {
         ]);
     }
 
-    public function show_all_from_user() {
-        $user = auth()->user();
+    public function show_all_from_user($user_id) {
+        $logged_in_user = Auth()->user();
+        if (!$logged_in_user->can("view customer orders") && $logged_in_user->id != $user_id) {
+            return redirect()->back()->with("error", "You don't have permission to view customer orders.");
+        }
+        $user = User::find($user_id);
         $orders = $user->orders->sortByDesc("id");
         return view("orders.show", [
             "orders" => $orders,
@@ -43,7 +47,7 @@ class OrderController extends Controller {
         $user = auth()->user();
         $orders = Order::find($order_id);
         $order->load('customer', 'shop', 'item', 'delivery', 'order_responses');
-        return view('orders.show', [
+        return view(route('orders.show', $user->id), [
             "order" => $order
         ]);
     }
@@ -73,7 +77,7 @@ class OrderController extends Controller {
         $order->quantity = $validatedData['quantity'];
         $order->save();
 
-        return redirect()->route('orders.show');
+        return redirect()->route('orders.show', Auth()->user()->id);
     }
     
 
@@ -173,20 +177,27 @@ class OrderController extends Controller {
         return view('orders.index', compact('orders'));
     }
 
+    public function admin_view_orders() {
+        return view("admin.view-orders", [
+            "orders" => Order::all(),
+        ]);
+    }
+
     public function cancel(Request $request) {
+        $user = Auth()->user();
         $order_id = $request->order_id;
         $order = Order::find($order_id);
         if ($order->status == "pending" && $order->customer_id == auth()->user()->id) {
             $order->delete();
-            return redirect()->route("orders.show")->with("success", "Order cancelled.");
+            return redirect()->route("orders.show", $user->id)->with("success", "Order cancelled.");
         }
-        return redirect()->route("orders.show")->with("error", "Failed to cancel order!");
+        return redirect()->route("orders.show", $user->id)->with("error", "Failed to cancel order!");
     }
 
     public function destroy($id) {
         $order = Order::find($id);
         $order->delete();
 
-        return redirect()->route("orders.show");
+        return redirect()->route("orders.show", Auth()->user()->id);
     }
 }

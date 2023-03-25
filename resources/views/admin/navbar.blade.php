@@ -37,7 +37,7 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                             </a>
                             <ul class="header3-sub-list list-unstyled">
                                 <li>
-                                    <a href="index.html">View Roles</a>
+                                    <a href="/admin-view-roles">View Roles</a>
                                 </li>
                                 <li>
                                     <a href="index2.html">Add Roles</a>
@@ -58,11 +58,25 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                                 </li>
                             </ul>
                         </li>
+                        
                         <li>
                             <a href="/admin-view-items">
                                 <i class="fas fa-shopping-basket"></i>
                                 <span class="bot-line"></span>Items</a>
                         </li>
+                            
+                        <li>
+                            <a href="/admin-view-orders">
+                                <i class="fas fa-chart-bar"></i>
+                            <span class="bot-line"></span>Orders</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/admin-view-stats">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="bot-line"></span>Stats</a>
+                        </li>
+
                     </ul>
                 </div>
                 <div class="header__tool">
@@ -196,7 +210,7 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                             <i class="fas fa-lock"></i>Roles</a>
                         <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                             <li>
-                                <a href="index.html">View Roles</a>
+                                <a href="/admin-view-roles">View Roles</a>
                             </li>
                             <li>
                                 <a href="index2.html">Add Roles</a>
@@ -218,9 +232,21 @@ $user_full_name = $user->first_name . " " . $user->last_name;
                     </li>
 
                     <li>
-                            <a href="/admin-view-items">
-                                <i class="fas fa-shopping-basket"></i>
-                                <span class="bot-line"></span>Items</a>
+                        <a href="/admin-view-items">
+                            <i class="fas fa-shopping-basket"></i>
+                        <span class="bot-line"></span>Items</a>
+                    </li>
+
+                    <li>
+                        <a href="/admin-view-orders">
+                            <i class="fas fa-chart-bar"></i>
+                        <span class="bot-line"></span>Orders</a>
+                    </li>
+
+                    <li>
+                        <a href="/admin-view-stats">
+                            <i class="fas fa-chart-bar"></i>
+                        <span class="bot-line"></span>Stats</a>
                     </li>
 
                 </ul>

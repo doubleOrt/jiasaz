@@ -1,13 +1,13 @@
 @extends("admin.app")
 
 @section("page_title")
-    Users
+    Statistics
 @endsection
 
 @php
     $user = auth()->user();
 
-    $PAGE_MAIN_TEXT = "View Users"
+    $PAGE_MAIN_TEXT = "Statistics"
 @endphp
 
 @include("php-utils")
@@ -31,7 +31,7 @@
                                     <li class="list-inline-item seprate">
                                         <span>/</span>
                                     </li>
-                                    <li class="list-inline-item">View Users</li>
+                                    <li class="list-inline-item">View Statistics</li>
                                 </ul>
                             </div>
                             <form class="au-form-icon--sm" action="" method="post">
@@ -50,24 +50,18 @@
                         <div class="col md-12"><hr /></div>
                     </div>
                 </div>
-                <div class="row">
-                    @include("admin.components.users-percentage-chart")
+                <div class="row mt-3">
+                    <div class="col col-md-12">
+                        @include("admin.components.stats-info")
+                    </div>
                 </div>
-                @php
-                    $roles = Spatie\Permission\Models\Role::all();
-                @endphp
-                @component('admin.components.users-table')
-                    @slot("users_rows")
-                        @foreach ($users as $user) 
-                            @include("admin.components.users-table-single-row")
-                        @endforeach
-                    @endslot
-                @endcomponent
+                <hr />
+                <div class="row mt-6">
+                    @include("admin.components.stats-cards")
+                </div>
             </div>
         </section>
     </div>
-
-    @include("components.map-modal")
 
 
 @endsection

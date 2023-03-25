@@ -12,6 +12,8 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\AdminController;
+
 
 
 /*
@@ -41,11 +43,18 @@ Route::middleware(["auth"])->group(function() {
     
     Route::get('/profile/{user}', [AuthenticatedSessionController::class, "show_user_profile"]);
 
-    Route::post('/order', [OrderController::class, "store"]);
+    Route::get("/user-items/{user}", [ItemController::class, "show_items_by_user"])
+        ->middleware(["permission:see shop items"])
+        ->name("items.show-by-user");
 
-    Route::post('/cancel-order', [OrderController::class, "cancel"]);
+    Route::get("/search", [ItemController::class, "search"])->name("items.search");
 
-    Route::get('/orders', [OrderController::class, 'show_all_from_user'])->name('orders.show');
+
+    Route::middleware(["role:admin|customer"])->group(function(){
+        Route::post('/order', [OrderController::class, "store"]);
+        Route::post('/cancel-order', [OrderController::class, "cancel"]);
+        Route::get('/orders/{user_id}', [OrderController::class, 'show_all_from_user'])->name('orders.show');
+    });
 
     Route::middleware(["role:admin|shop_owner"])->group(function(){
         Route::get("/shop-orders/{shop_id}", [OrderController::class, "show_all_to_shop"])
@@ -77,13 +86,6 @@ Route::middleware(["auth"])->group(function() {
         });
 
     });
-
-    Route::get("/user-items/{user}", [ItemController::class, "show_items_by_user"])
-        ->middleware(["permission:see shop items"])
-        ->name("items.show-by-user");
-
-    Route::get("/search", [ItemController::class, "search"])->name("items.search");
-
 
     Route::middleware(["role:admin|delivery_person"])->group(function() {
         Route::get("/show-available-deliveries", [DeliveryController::class, "show_available_deliveries"])
@@ -138,5 +140,14 @@ Route::middleware(["auth"])->group(function() {
     
     Route::post("/admin-delete-user", [RegisteredUserController::class, "admin_delete_user"])
     ->middleware(["permission:admin delete user accounts"]);
+
+    Route::get("/admin-view-stats", [AdminController::class, "view_stats"])
+    ->middleware(["permission:admin view stats"]);
+
+    Route::get("/admin-view-orders", [OrderController::class, "admin_view_orders"])
+    ->middleware(["permission:admin view orders"]);
+
+    Route::get("/admin-view-roles", [AdminController::class, "view_roles"])
+    ->middleware(["permission:admin view roles"]);
 
 });

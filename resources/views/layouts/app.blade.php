@@ -224,9 +224,17 @@ $NAVBAR_SEARCH_PLACEHOLDER_TEXT = "Search for items...";
         @case("shop_owner")
             @include("navigation.navigation-shop-owner")
             @break
+
+        @case("shop_owner")
+            @include("navigation.navigation-shop-owner")
+            @break
+
+        @case("admin")
+            @include("navigation.navigation-admin")
+            @break
     
         @default
-            @include("navigation.navigation-delivery-person")
+            @include("navigation.navigation-user")
         @endswitch
         
 
